@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\natal\Documents\Atmel Studio\7.0\aghmtmpn\AVR\cw_13\main.asm Fri Nov 04 20:37:35 2022
+AVRASM ver. 2.2.8  C:\Users\natal\Documents\Atmel Studio\7.0\aghmtmpn\AVR\cw_28\main.asm Wed Oct 19 20:47:06 2022
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,6 +448,4 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-CSEG Inf          00000000
-CSEG Loop1        00000001
-CSEG Loop2        00000002
+CSEG Loop         00000003
