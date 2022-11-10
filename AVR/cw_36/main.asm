@@ -12,3 +12,4 @@ lpm R23, Z // odczyt czwartej sta³ej
 nop
 Table: .db 0x57, 0x58, 0x59, 0x5A // UWAGA: liczba bajtów zdeklarowanych
  // w pamiêci kodu musi byæ parzysta
+

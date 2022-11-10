@@ -1,0 +1,33 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATtiny2313"</DEVICE>
+ <WORKING_DIR>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc\tn2313def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\Debug\cw_39.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>cw_39.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>cw_39.map</FILE>
+  <FILE>cw_39.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <DigitTo7segCode><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>81</LINE></DigitTo7segCode>
+  <MainLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>51</LINE></MainLoop>
+  <DelayInMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>102</LINE></DelayInMs>
+  <Table><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>98</LINE></Table>
+  <MLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>108</LINE></MLoop>
+  <DelayOneMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>125</LINE></DelayOneMs>
+  <Loop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>129</LINE></Loop>
+ </LABELS>
+</ASSEMBLER_INFO>

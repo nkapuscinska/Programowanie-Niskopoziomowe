@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_36\main.asm Thu Nov 10 00:57:09 2022
+AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu Nov 10 02:37:21 2022
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc\tn2313def.inc'
                                  
-                                 // Program odczytuje 4 bajty z tablicy sta³ych zdefiniowanej w pamiêci kodu do rejestrów R20..R23
+                                 //makra//
                                  
                                  ;***** Created: 2011-02-09 12:04 ******* Source: ATtiny2313.xml **********
                                  ;*************************************************************************
@@ -666,20 +666,162 @@ AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_36\main.asm Thu
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
+                                 	.macro LOAD_CONST
+                                 ldi @0, high(@2)
+                                 ldi @1, low(@2)
                                  
-000000 e1e4                      ldi R30, low(Table<<1) // inicjalizacja rejestru Z 
-000001 e0f0                      ldi R31, high(Table<<1)
-000002 9144                      lpm R20, Z // odczyt pierwszej sta³ej z tablicy Table
-000003 9631                      adiw R30:R31,1 // inkrementacja Z
-000004 9154                      lpm R21, Z // odczyt drugiej sta³ej
-000005 9631                      adiw R30:R31,1 // inkrementacja Z
-000006 9164                      lpm R22, Z // odczyt trzeciej sta³ej
-000007 9631                      adiw R30:R31,1 // inkrementacja Z 
-000008 9174                      lpm R23, Z // odczyt czwartej sta³ej
-000009 0000                      nop
-00000a 5857
-00000b 5a59                      Table: .db 0x57, 0x58, 0x59, 0x5A // UWAGA: liczba bajtów zdeklarowanych
-                                  // w pamiêci kodu musi byæ parzysta
+                                 .endmacro
+                                 
+                                 	.macro SET_DIGIT
+                                 	ldi R24, 0b00000000
+                                 	out Segments_P, R24
+                                 	ldi R24, 0b00000010 << @0
+                                 	out Segments_P, R24
+                                 
+                                 .endmacro
+                                 	
+                                 
+                                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                 
+                                 //////////////////////////////// main//////////////////////////////////////
+                                 		
+000000 e010
+000001 e005                      		LOAD_CONST R17, R16, 5 // podaje opoznienie
+                                 
+000002 e14e                      		ldi R20, 0b00011110 /// inicjalizacja wyœwietlaczy
+000003 bb47                      		out DDRB, R20
+000004 e74f                      		ldi R20, 0b01111111
+                                 		//out DDRD, R20 //<<---------------- !!!!!!!!!!!wkurwiaj¹ce œwiat³o!!!!!!!!!!!!!!!!!
+                                 
+                                 		
+000005 e000                      		ldi R16, 0
+000006 d02b                      		rcall DigitTo7segCode
+000007 2e20                      		mov R2, R16
+000008 e001                      		ldi R16, 1
+000009 d028                      		rcall DigitTo7segCode
+00000a 2e30                      		mov R3, R16
+00000b e002                      		ldi R16, 2
+00000c d025                      		rcall DigitTo7segCode
+00000d 2e40                      		mov R4, R16
+00000e e003                      		ldi R16, 3
+00000f d022                      		rcall DigitTo7segCode
+000010 2e50                      		mov R5, R16
+                                 
+                                 		.def Digit_0 = R2
+                                 		.def Digit_1 = R3
+                                 		.def Digit_2 = R4
+                                 		.def Digit_3 = R5
+                                 		
+                                 		
+                                 		.equ Digits_P = PORTD  //CYFERKA
+                                 		.equ Segments_P = PORTB  // NA KTÓRYM WYŒWIETLACZU
+                                 		
+                                 MainLoop: 
+                                 		
+000011 e080
+000012 bb88
+000013 e082
+000014 bb88                      		SET_DIGIT 0
+000015 ba22                      		out Digits_P, Digit_0
+                                 	
+000016 e010
+000017 e005                      		LOAD_CONST R17, R16, 5
+000018 d02c                      		rcall DelayInMs
+                                 
+000019 e080
+00001a bb88
+00001b e084
+00001c bb88                      		SET_DIGIT 1
+00001d ba32                      		out Digits_P, Digit_1
+                                 
+00001e e010
+00001f e005                      		LOAD_CONST R17, R16, 5
+000020 d024                      		rcall DelayInMs
+                                 
+000021 e080
+000022 bb88
+000023 e088
+000024 bb88                      		SET_DIGIT 2
+000025 ba42                      		out Digits_P, Digit_2
+                                 		
+000026 e010
+000027 e005                      		LOAD_CONST R17, R16, 5
+000028 d01c                      		rcall DelayInMs
+                                 
+000029 e080
+00002a bb88
+00002b e180
+00002c bb88                      		SET_DIGIT 3
+00002d ba52                      		out Digits_P, Digit_3
+                                 		
+00002e e010
+00002f e005                      		LOAD_CONST R17, R16, 5
+000030 d014                      		rcall DelayInMs
+                                 
+000031 cfdf                      		rjmp MainLoop
+                                 
+                                 ////////////////////////konwersja z ludzkiego na wyœwietlacz//////////////////////////////////////////////
+                                 
+                                 DigitTo7segCode:
+000032 93ef                      	push R30
+000033 93ff                      	push R31
+000034 931f                      	push R17
+000035 e010                      	ldi R17, 0
+000036 e8e0                      	ldi R30, low(Table<<1) // inicjalizacja rejestru Z 
+000037 e0f0                      	ldi R31, high(Table<<1)
+000038 0fe0                      	add R30, R16  // inkrementacja Z
+000039 1ff1                      	adc R31, R17
+00003a 9104                      	lpm R16, Z // podmianka
+00003b 0000                      	nop
+00003c 911f                      	pop R17
+00003d 91ff                      	pop R31
+00003e 91ff                      	pop R31
+                                 
+00003f 9508                      ret
+                                 
+000040 063f
+000041 4f5b
+000042 6d66
+000043 07fd
+000044 6f7f                      Table: .db 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0xFD, 0x07, 0x7F, 0x6F // UWAGA: liczba bajtów zdeklarowanych
+                                 
+                                 /////////////////////////Delay///////////////////
+                                 
+                                 DelayInMs: //opoznienie w R16,R17
+000045 938f                      	           push R24
+000046 939f                      			   push R25
+                                 
+000047 2f80                      			   mov R24, R16
+000048 2f91                      			   mov R25, R17
+                                 	   MLoop: 
+000049 d005                      			   rcall DelayOneMs
+                                 			   
+00004a 9701                      			   sbiw R25:R24, 1
+00004b f7e9                      			   brbc 1, MLoop
+                                 
+00004c 919f                      			   pop R25
+00004d 918f                      			   pop R24
+00004e 9508                        			   ret
+                                 
+                                 
+                                 			   //input none
+                                 			   //output none
+                                 			   //internals R24,R25
+                                 			   //ochrona R24, R25
+                                 			   //r25, r17 starsza czesc
+                                 			   //R24, r16 m³odsza czesc
+                                   DelayOneMs:
+00004f 938f                      			 push R24
+000050 939f                      			 push R25
+000051 e097
+000052 ed80                      	    	 LOAD_CONST R25, R24, 2000
+000053 9701                      	   Loop: sbiw R25:R24, 1
+000054 f7f1                      	         brbc 1, Loop
+000055 919f                      			 pop R25
+000056 918f                      			 pop R24
+000057 9508                      			 ret
+                                 
+                                 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                  
 
 
@@ -698,16 +840,16 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATtiny2313" register use summary:
-x  :   0 y  :   0 z  :   4 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
-r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   0 r17:   0 r18:   0 r19:   0 r20:   1 
-r21:   1 r22:   1 r23:   1 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
-r29:   0 r30:   4 r31:   4 
-Registers used: 7 out of 35 (20.0%)
+x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   2 r3 :   2 r4 :   2 
+r5 :   2 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
+r13:   0 r14:   0 r15:   0 r16:  16 r17:  10 r18:   0 r19:   0 r20:   3 
+r21:   0 r22:   0 r23:   0 r24:  24 r25:   8 r26:   0 r27:   0 r28:   0 
+r29:   0 r30:   3 r31:   5 
+Registers used: 12 out of 35 (34.3%)
 
 "ATtiny2313" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   3 and   :   0 
-andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+.lds  :   0 .sts  :   0 adc   :   1 add   :   1 adiw  :   0 and   :   0 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   2 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
@@ -715,21 +857,21 @@ brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0
 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   0 ld    :   0 ldd   :   0 ldi   :   2 lds   :   0 lpm   :   8 
-lsl   :   0 lsr   :   0 mov   :   0 movw  :   0 neg   :   0 nop   :   1 
-or    :   0 ori   :   0 out   :   0 pop   :   0 push  :   0 rcall :   0 
-ret   :   0 reti  :   0 rjmp  :   0 rol   :   0 ror   :   0 sbc   :   0 
-sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   0 sbr   :   0 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :  29 lds   :   0 lpm   :   2 
+lsl   :   0 lsr   :   0 mov   :   6 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :  13 pop   :   7 push  :   7 rcall :   9 
+ret   :   3 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   0 
+sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   2 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
 ser   :   0 ses   :   0 set   :   0 sev   :   0 sez   :   0 sleep :   0 
 spm   :   0 st    :   0 std   :   0 sts   :   0 sub   :   0 subi  :   0 
 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 4 out of 105 (3.8%)
+Instructions used: 14 out of 105 (13.3%)
 
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000018     20      4     24    2048   1.2%
+[.cseg] 0x000000 0x0000b0    166     10    176    2048   8.6%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

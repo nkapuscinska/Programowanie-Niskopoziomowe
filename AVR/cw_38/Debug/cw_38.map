@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_36\main.asm Thu Nov 10 00:57:09 2022
+AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_38\main.asm Thu Nov 10 01:16:50 2022
 
 
 EQU  SIGNATURE_000 0000001e
@@ -448,4 +448,5 @@ EQU  USI_OVFaddr  00000010
 EQU  ERDYaddr     00000011
 EQU  WDTaddr      00000012
 EQU  INT_VECTORS_SIZE 00000013
-CSEG Table        0000000a
+CSEG Podmianka    00000005
+CSEG Table        0000000d
