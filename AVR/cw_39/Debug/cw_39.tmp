@@ -22,12 +22,12 @@
   <FILE>cw_39.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <DigitTo7segCode><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>81</LINE></DigitTo7segCode>
-  <MainLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>51</LINE></MainLoop>
-  <DelayInMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>102</LINE></DelayInMs>
-  <Table><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>98</LINE></Table>
-  <MLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>108</LINE></MLoop>
-  <DelayOneMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>125</LINE></DelayOneMs>
-  <Loop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>129</LINE></Loop>
+  <MainLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>54</LINE></MainLoop>
+  <DigitTo7segCode><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>65</LINE></DigitTo7segCode>
+  <DelayInMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>86</LINE></DelayInMs>
+  <Table><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>82</LINE></Table>
+  <MLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>92</LINE></MLoop>
+  <DelayOneMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>109</LINE></DelayOneMs>
+  <Loop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm</FILE><LINE>113</LINE></Loop>
  </LABELS>
 </ASSEMBLER_INFO>

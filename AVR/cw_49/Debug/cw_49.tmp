@@ -1,0 +1,41 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATtiny2313A"</DEVICE>
+ <WORKING_DIR>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc\tn2313Adef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\Debug\cw_49.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>cw_49.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>cw_49.map</FILE>
+  <FILE>cw_49.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <_main><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>101</LINE></_main>
+  <_timer_isr><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>28</LINE></_timer_isr>
+  <_pcint0_isr><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>56</LINE></_pcint0_isr>
+  <NumberToDigits><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>278</LINE></NumberToDigits>
+  <Divide><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>244</LINE></Divide>
+  <Skip><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>83</LINE></Skip>
+  <MainLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>146</LINE></MainLoop>
+  <DigitTo7segCode><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>164</LINE></DigitTo7segCode>
+  <DelayInMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>185</LINE></DelayInMs>
+  <Table><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>181</LINE></Table>
+  <MLoop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>191</LINE></MLoop>
+  <DelayOneMs><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>208</LINE></DelayOneMs>
+  <Loop><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>212</LINE></Loop>
+  <Division><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>251</LINE></Division>
+  <end><FILE>C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_49\main.asm</FILE><LINE>259</LINE></end>
+ </LABELS>
+</ASSEMBLER_INFO>

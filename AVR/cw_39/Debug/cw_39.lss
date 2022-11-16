@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu Nov 10 02:37:21 2022
+AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu Nov 10 13:47:16 2022
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc\tn2313def.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.10.348\avrasm\inc\tn2313def.inc'
@@ -677,6 +677,12 @@ AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu
                                  	out Segments_P, R24
                                  	ldi R24, 0b00000010 << @0
                                  	out Segments_P, R24
+                                 	ldi R16, @0
+                                 	rcall DigitTo7segCode
+                                 	mov Digit_@0, R16
+                                 	out Digits_P, Digit_@0
+                                 	LOAD_CONST R17, R16, 5
+                                 	rcall DelayInMs
                                  
                                  .endmacro
                                  	
@@ -685,27 +691,23 @@ AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu
                                  
                                  //////////////////////////////// main//////////////////////////////////////
                                  		
-000000 e010
-000001 e005                      		LOAD_CONST R17, R16, 5 // podaje opoznienie
                                  
-000002 e14e                      		ldi R20, 0b00011110 /// inicjalizacja wyœwietlaczy
-000003 bb47                      		out DDRB, R20
-000004 e74f                      		ldi R20, 0b01111111
-                                 		//out DDRD, R20 //<<---------------- !!!!!!!!!!!wkurwiaj¹ce œwiat³o!!!!!!!!!!!!!!!!!
+000000 e14e                      		ldi R20, 0b00011110 /// inicjalizacja wyœwietlaczy
+000001 bb47                      		out DDRB, R20
+000002 e74f                      		ldi R20, 0b01111111
+000003 bb41                      		out DDRD, R20 //<<---------------- !!!!!!!!!!!wkurwiaj¹ce œwiat³o!!!!!!!!!!!!!!!!!
                                  
                                  		
-000005 e000                      		ldi R16, 0
-000006 d02b                      		rcall DigitTo7segCode
-000007 2e20                      		mov R2, R16
-000008 e001                      		ldi R16, 1
-000009 d028                      		rcall DigitTo7segCode
-00000a 2e30                      		mov R3, R16
-00000b e002                      		ldi R16, 2
-00000c d025                      		rcall DigitTo7segCode
-00000d 2e40                      		mov R4, R16
-00000e e003                      		ldi R16, 3
-00000f d022                      		rcall DigitTo7segCode
-000010 2e50                      		mov R5, R16
+000004 e000                      		ldi R16, 0
+000005 2e20                      		mov R2, R16
+000006 e001                      		ldi R16, 1
+000007 2e30                      		mov R3, R16
+000008 e002                      		ldi R16, 2
+000009 2e40                      		mov R4, R16
+00000a e003                      		ldi R16, 3
+00000b 2e50                      		mov R5, R16
+                                 
+                                 
                                  
                                  		.def Digit_0 = R2
                                  		.def Digit_1 = R3
@@ -718,90 +720,95 @@ AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu
                                  		
                                  MainLoop: 
                                  		
-000011 e080
-000012 bb88
-000013 e082
-000014 bb88                      		SET_DIGIT 0
-000015 ba22                      		out Digits_P, Digit_0
-                                 	
-000016 e010
-000017 e005                      		LOAD_CONST R17, R16, 5
-000018 d02c                      		rcall DelayInMs
-                                 
-000019 e080
+00000c e080
+00000d bb88
+00000e e082
+00000f bb88
+000010 e000
+000011 d027
+000012 2e20
+000013 ba22
+000014 e010
+000015 e005
+000016 d035                      		SET_DIGIT 0
+000017 e080
+000018 bb88
+000019 e084
 00001a bb88
-00001b e084
-00001c bb88                      		SET_DIGIT 1
-00001d ba32                      		out Digits_P, Digit_1
+00001b e001
+00001c d01c
+00001d 2e30
+00001e ba32
+00001f e010
+000020 e005
+000021 d02a                      		SET_DIGIT 1
+000022 e080
+000023 bb88
+000024 e088
+000025 bb88
+000026 e002
+000027 d011
+000028 2e40
+000029 ba42
+00002a e010
+00002b e005
+00002c d01f                      		SET_DIGIT 2
+00002d e080
+00002e bb88
+00002f e180
+000030 bb88
+000031 e003
+000032 d006
+000033 2e50
+000034 ba52
+000035 e010
+000036 e005
+000037 d014                      		SET_DIGIT 3
                                  
-00001e e010
-00001f e005                      		LOAD_CONST R17, R16, 5
-000020 d024                      		rcall DelayInMs
-                                 
-000021 e080
-000022 bb88
-000023 e088
-000024 bb88                      		SET_DIGIT 2
-000025 ba42                      		out Digits_P, Digit_2
-                                 		
-000026 e010
-000027 e005                      		LOAD_CONST R17, R16, 5
-000028 d01c                      		rcall DelayInMs
-                                 
-000029 e080
-00002a bb88
-00002b e180
-00002c bb88                      		SET_DIGIT 3
-00002d ba52                      		out Digits_P, Digit_3
-                                 		
-00002e e010
-00002f e005                      		LOAD_CONST R17, R16, 5
-000030 d014                      		rcall DelayInMs
-                                 
-000031 cfdf                      		rjmp MainLoop
+000038 cfd3                      		rjmp MainLoop
                                  
                                  ////////////////////////konwersja z ludzkiego na wyœwietlacz//////////////////////////////////////////////
                                  
                                  DigitTo7segCode:
-000032 93ef                      	push R30
-000033 93ff                      	push R31
-000034 931f                      	push R17
-000035 e010                      	ldi R17, 0
-000036 e8e0                      	ldi R30, low(Table<<1) // inicjalizacja rejestru Z 
-000037 e0f0                      	ldi R31, high(Table<<1)
-000038 0fe0                      	add R30, R16  // inkrementacja Z
-000039 1ff1                      	adc R31, R17
-00003a 9104                      	lpm R16, Z // podmianka
-00003b 0000                      	nop
-00003c 911f                      	pop R17
-00003d 91ff                      	pop R31
-00003e 91ff                      	pop R31
+000039 93ef                      	push R30
+00003a 93ff                      	push R31
+00003b 931f                      	push R17
+00003c e010                      	ldi R17, 0
+00003d e8ee                      	ldi R30, low(Table<<1) // inicjalizacja rejestru Z 
+00003e e0f0                      	ldi R31, high(Table<<1)
+00003f 0fe0                      	add R30, R16  // inkrementacja Z
+000040 1ff1                      	adc R31, R17
+000041 9104                      	lpm R16, Z // podmianka
+000042 0000                      	nop
+000043 911f                      	pop R17
+000044 91ff                      	pop R31
+000045 91ff                      	pop R31
                                  
-00003f 9508                      ret
+000046 9508                      ret
                                  
-000040 063f
-000041 4f5b
-000042 6d66
-000043 07fd
-000044 6f7f                      Table: .db 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0xFD, 0x07, 0x7F, 0x6F // UWAGA: liczba bajtów zdeklarowanych
+000047 063f
+000048 4f5b
+000049 6d66
+00004a 07fd
+00004b 6f7f                      Table: .db 0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D, 0xFD, 0x07, 0x7F, 0x6F // UWAGA: liczba bajtów zdeklarowanych
                                  
                                  /////////////////////////Delay///////////////////
                                  
                                  DelayInMs: //opoznienie w R16,R17
-000045 938f                      	           push R24
-000046 939f                      			   push R25
+00004c 938f                      	           push R24
+00004d 939f                      			   push R25
                                  
-000047 2f80                      			   mov R24, R16
-000048 2f91                      			   mov R25, R17
+00004e 2f80                      			   mov R24, R16
+00004f 2f91                      			   mov R25, R17
                                  	   MLoop: 
-000049 d005                      			   rcall DelayOneMs
+000050 d005                      			   rcall DelayOneMs
                                  			   
-00004a 9701                      			   sbiw R25:R24, 1
-00004b f7e9                      			   brbc 1, MLoop
+000051 9701                      			   sbiw R25:R24, 1
+000052 f7e9                      			   brbc 1, MLoop
                                  
-00004c 919f                      			   pop R25
-00004d 918f                      			   pop R24
-00004e 9508                        			   ret
+000053 919f                      			   pop R25
+000054 918f                      			   pop R24
+000055 9508                        			   ret
                                  
                                  
                                  			   //input none
@@ -811,15 +818,15 @@ AVRASM ver. 2.2.8  C:\Users\surfac\Documents\avr\aghmtmpn\AVR\cw_39\main.asm Thu
                                  			   //r25, r17 starsza czesc
                                  			   //R24, r16 m³odsza czesc
                                    DelayOneMs:
-00004f 938f                      			 push R24
-000050 939f                      			 push R25
-000051 e097
-000052 ed80                      	    	 LOAD_CONST R25, R24, 2000
-000053 9701                      	   Loop: sbiw R25:R24, 1
-000054 f7f1                      	         brbc 1, Loop
-000055 919f                      			 pop R25
-000056 918f                      			 pop R24
-000057 9508                      			 ret
+000056 938f                      			 push R24
+000057 939f                      			 push R25
+000058 e097
+000059 ed80                      	    	 LOAD_CONST R25, R24, 2000
+00005a 9701                      	   Loop: sbiw R25:R24, 1
+00005b f7f1                      	         brbc 1, Loop
+00005c 919f                      			 pop R25
+00005d 918f                      			 pop R24
+00005e 9508                      			 ret
                                  
                                  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                  
@@ -840,9 +847,9 @@ counted separately from r26..r31 here.
 .dseg memory usage only counts static data declared with .byte
 
 "ATtiny2313" register use summary:
-x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   2 r3 :   2 r4 :   2 
-r5 :   2 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  16 r17:  10 r18:   0 r19:   0 r20:   3 
+x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   3 r3 :   3 r4 :   3 
+r5 :   3 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
+r13:   0 r14:   0 r15:   0 r16:  23 r17:   9 r18:   0 r19:   0 r20:   4 
 r21:   0 r22:   0 r23:   0 r24:  24 r25:   8 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   3 r31:   5 
 Registers used: 12 out of 35 (34.3%)
@@ -857,9 +864,9 @@ brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   0 clc   :   0
 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 cpi   :   0 
 cpse  :   0 dec   :   0 eor   :   0 icall :   0 ijmp  :   0 in    :   0 
-inc   :   0 ld    :   0 ldd   :   0 ldi   :  29 lds   :   0 lpm   :   2 
-lsl   :   0 lsr   :   0 mov   :   6 movw  :   0 neg   :   0 nop   :   1 
-or    :   0 ori   :   0 out   :  13 pop   :   7 push  :   7 rcall :   9 
+inc   :   0 ld    :   0 ldd   :   0 ldi   :  31 lds   :   0 lpm   :   2 
+lsl   :   0 lsr   :   0 mov   :  10 movw  :   0 neg   :   0 nop   :   1 
+or    :   0 ori   :   0 out   :  14 pop   :   7 push  :   7 rcall :   9 
 ret   :   3 reti  :   0 rjmp  :   1 rol   :   0 ror   :   0 sbc   :   0 
 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 sbiw  :   2 sbr   :   0 
 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 sei   :   0 sen   :   0 
@@ -871,7 +878,7 @@ Instructions used: 14 out of 105 (13.3%)
 "ATtiny2313" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x0000b0    166     10    176    2048   8.6%
+[.cseg] 0x000000 0x0000be    180     10    190    2048   9.3%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

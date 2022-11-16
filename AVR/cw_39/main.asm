@@ -10,6 +10,12 @@ ldi @1, low(@2)
 	out Segments_P, R24
 	ldi R24, 0b00000010 << @0
 	out Segments_P, R24
+	ldi R16, @0
+	rcall DigitTo7segCode
+	mov Digit_@0, R16
+	out Digits_P, Digit_@0
+	LOAD_CONST R17, R16, 5
+	rcall DelayInMs
 
 .endmacro
 	
@@ -18,26 +24,23 @@ ldi @1, low(@2)
 
 //////////////////////////////// main//////////////////////////////////////
 		
-		LOAD_CONST R17, R16, 5 // podaje opoznienie
 
 		ldi R20, 0b00011110 /// inicjalizacja wyœwietlaczy
 		out DDRB, R20
 		ldi R20, 0b01111111
-		//out DDRD, R20 //<<---------------- !!!!!!!!!!!wkurwiaj¹ce œwiat³o!!!!!!!!!!!!!!!!!
+		out DDRD, R20 //<<---------------- !!!!!!!!!!!wkurwiaj¹ce œwiat³o!!!!!!!!!!!!!!!!!
 
 		
 		ldi R16, 0
-		rcall DigitTo7segCode
 		mov R2, R16
 		ldi R16, 1
-		rcall DigitTo7segCode
 		mov R3, R16
 		ldi R16, 2
-		rcall DigitTo7segCode
 		mov R4, R16
 		ldi R16, 3
-		rcall DigitTo7segCode
 		mov R5, R16
+
+
 
 		.def Digit_0 = R2
 		.def Digit_1 = R3
@@ -51,28 +54,9 @@ ldi @1, low(@2)
 MainLoop: 
 		
 		SET_DIGIT 0
-		out Digits_P, Digit_0
-	
-		LOAD_CONST R17, R16, 5
-		rcall DelayInMs
-
 		SET_DIGIT 1
-		out Digits_P, Digit_1
-
-		LOAD_CONST R17, R16, 5
-		rcall DelayInMs
-
 		SET_DIGIT 2
-		out Digits_P, Digit_2
-		
-		LOAD_CONST R17, R16, 5
-		rcall DelayInMs
-
 		SET_DIGIT 3
-		out Digits_P, Digit_3
-		
-		LOAD_CONST R17, R16, 5
-		rcall DelayInMs
 
 		rjmp MainLoop
 
